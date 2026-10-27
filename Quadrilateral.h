@@ -8,7 +8,7 @@ private:
     double hypotenuse(Point a, Point b) const;
 
 public:
-    Quadrilateral(Point a, Point b, Point c, Point d);
+    Quadrilateral(const Point a, const Point b,  const Point c,  const Point d);
 
     void print() const;
 
