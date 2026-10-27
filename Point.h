@@ -7,7 +7,7 @@ private:
     double y;
 
 public:
-    Point(double p_x, double p_y);
+    Point(const double p_x, const double p_y);
 
     double getX() const;
     double getY() const;
