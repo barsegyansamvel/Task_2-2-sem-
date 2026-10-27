@@ -1,9 +1,10 @@
 #include <cmath>
+#include <cfloat>
 #include "Quadrilateral.h"
 #include <algorithm>
 
-Quadrilateral::Quadrilateral(Point a, Point b, Point c, Point d)
-    : points {a, b, c, d}
+Quadrilateral::Quadrilateral(const Point a, const Point b, const Point c, const Point d)
+    : points{a, b, c, d}
 {
 }
 
@@ -40,11 +41,11 @@ bool Quadrilateral::isConvex() const
         {
             return false;
         }
-        if (check>0)
+        else if (check>0)
         {
             positive=true;
         }
-        if(check<0)
+        else
         {
             negative=true;
         }
@@ -77,9 +78,7 @@ bool Quadrilateral::canDescribe() const
     double left = acDiag * bdDiag;
     double right = ab * cd + bc * da;
 
-    double epsilon = 1e-9 * std::max(left, right);
-
-    if (std::abs(left - right) <= epsilon)
+    if (std::abs(left - right) <= DBL_EPSILON)
     {
         return true;
     }
