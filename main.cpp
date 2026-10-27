@@ -1,31 +1,34 @@
 #include <iostream>
 #include "Quadrilateral.h"
-
-int main()
+Point getPoint()
 {
-    double ax, ay;
-    double bx, by;
-    double cx, cy;
-    double dx, dy;
-
-    std::cout << "Enter A, B, C, D in boundary order.\n";
-    std::cout << "Enter x and y for each point:\n";
-
-    std::cin >> ax >> ay;
-    std::cin >> bx >> by;
-    std::cin >> cx >> cy;
-    std::cin >> dx >> dy;
+    double x, y;
+    std::cin >> x >> y;
 
     if (std::cin.fail())
     {
         std::cout << "Input error.\n";
-        return 1;
+        std::exit(1);
     }
 
-    Point a{ax, ay};
-    Point b{bx, by};
-    Point c{cx, cy};
-    Point d{dx, dy};
+    return Point{x, y};
+}
+
+int main()
+{
+    std::cout << "Enter vertices in order A -> B -> C -> D.\n";
+
+    std::cout << "A (x y): ";
+    Point a = getPoint();
+
+    std::cout << "B (x y): ";
+    Point b = getPoint();
+
+    std::cout << "C (x y): ";
+    Point c = getPoint();
+
+    std::cout << "D (x y): ";
+    Point d = getPoint();
 
     Quadrilateral figure{a, b, c, d};
 
