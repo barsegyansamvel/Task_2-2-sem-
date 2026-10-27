@@ -1,57 +1,18 @@
-#include <iostream>
-#include "Quadrilateral.h"
-Point getPoint()
+#pragma once
+#include "Point.h"
+
+class Quadrilateral
 {
-    double x, y;
-    std::cin >> x >> y;
+private:
+    Point points[4];
+    double hypotenuse(const Point a, const Point b) const;
 
-    if (std::cin.fail())
-    {
-        std::cout << "Input error.\n";
-        std::exit(1);
-    }
+public:
+    Quadrilateral(const Point a, const Point b,  const Point c,  const Point d);
 
-    return Point{x, y};
-}
+    void print() const;
 
-int main()
-{
-    std::cout << "Enter vertices in order A -> B -> C -> D.\n";
+    bool isConvex() const;
 
-    std::cout << "A (x y): ";
-    Point a = getPoint();
-
-    std::cout << "B (x y): ";
-    Point b = getPoint();
-
-    std::cout << "C (x y): ";
-    Point c = getPoint();
-
-    std::cout << "D (x y): ";
-    Point d = getPoint();
-
-    Quadrilateral figure{a, b, c, d};
-
-    std::cout << "\nVertices:\n";
-    figure.print();
-
-    if (figure.isConvex())
-    {
-        std::cout << "Convex: yes\n";
-    }
-    else
-    {
-        std::cout << "Convex: no\n";
-    }
-
-    if (figure.canDescribe())
-    {
-        std::cout << "Circumscribed circle: yes\n";
-    }
-    else
-    {
-        std::cout << "Circumscribed circle: no\n";
-    }
-
-    return 0;
-}
+    bool canDescribe() const;
+};
