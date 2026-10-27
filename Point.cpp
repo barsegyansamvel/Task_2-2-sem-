@@ -1,7 +1,7 @@
 #include "Point.h"
 #include <iostream>
 
-Point::Point(double p_x, double p_y)
+Point::Point(const double p_x, const double p_y)
 {
     x=p_x;
     y=p_y;
