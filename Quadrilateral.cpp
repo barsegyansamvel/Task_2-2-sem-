@@ -8,7 +8,7 @@ Quadrilateral::Quadrilateral(const Point a, const Point b, const Point c, const 
 {
 }
 
-double Quadrilateral::hypotenuse(Point a, Point b) const
+double Quadrilateral::hypotenuse(const Point a, const Point b) const
 {
     double dx = b.getX() - a.getX();
     double dy = b.getY() - a.getY();
@@ -18,7 +18,7 @@ double Quadrilateral::hypotenuse(Point a, Point b) const
 
 void Quadrilateral::print() const
 {
-    for(int i=0;i<4;i=i+1)
+    for(size_t i=0;i<4;i=i+1)
     {
         points[i].print();
     }
@@ -29,7 +29,7 @@ bool Quadrilateral::isConvex() const
     bool positive = false;
     bool negative = false;
 
-    for(int i=0;i<4;i=i+1)
+    for(size_t i=0;i<4;i=i+1)
     {
         Point a=points[i];
         Point b=points[(i+1)%4];
@@ -37,7 +37,7 @@ bool Quadrilateral::isConvex() const
 
         double check=(b.getX()-a.getX())*(c.getY()-b.getY())-(b.getY()-a.getY())*(c.getX()-b.getX());
 
-        if(std::abs(check)<1e-9)
+        if(std::abs(check)<DBL_EPSILON)
         {
             return false;
         }
