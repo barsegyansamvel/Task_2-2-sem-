@@ -2,51 +2,39 @@
 
 #include <istream>
 #include <ostream>
-#include <stdexcept>
 
 Segment::Segment(const Point& leftPoint, const Point& rightPoint)
-    : leftPoint(leftPoint), rightPoint(rightPoint.getX(), leftPoint.getY())
+    : approximation(std::vector<Point>{
+        leftPoint,
+        Point(rightPoint.getX(), leftPoint.getY())
+    })
 {
-    if (rightPoint.getX() < leftPoint.getX())
-    {
-        throw std::invalid_argument("Абсцисса правой точки меньше абсциссы левой");
-    }
 }
 
 Point Segment::getLeftPoint() const
 {
-    return leftPoint;
+    return approximation.GetPoints().front();
 }
 
 Point Segment::getRightPoint() const
 {
-    return rightPoint;
+    return approximation.GetPoints().back();
 }
 
 double Segment::getY(const double x) const
 {
-    if (x < leftPoint.getX() || x > rightPoint.getX())
-    {
-        throw std::out_of_range("Абсцисса находится вне отрезка");
-    }
-
-    return leftPoint.getY();
+    return approximation.getY(x);
 }
 
 Segment Segment::Read(std::istream& input)
 {
-    Point left;
-    Point right;
-
-    if (!(input >> left >> right))
-    {
-        throw std::runtime_error("Не удалось прочитать две точки отрезка");
-    }
-
-    return Segment(left, right);
+    const std::vector<Point> points =
+        PiecewiseLinearApproximation::ReadPoints(input, 2);
+    return Segment(points[0], points[1]);
 }
 
 std::ostream& operator<<(std::ostream& output, const Segment& segment)
 {
-    return output << '[' << segment.leftPoint << "; " << segment.rightPoint << ']';
+    return output << "[" << segment.getLeftPoint()
+                  << "; " << segment.getRightPoint() << "]";
 }
