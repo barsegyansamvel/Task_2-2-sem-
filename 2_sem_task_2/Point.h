@@ -1,10 +1,10 @@
 #pragma once
 
-#include <iostream>
+#include <iosfwd>
 
 /**
-@brief Декартова точка на плоскости.
-*/
+ * @brief Декартова точка на плоскости.
+ */
 class Point
 {
 private:
@@ -13,49 +13,24 @@ private:
 
 public:
     /**
-    @brief Создаёт точку с заданными координатами.
-    @param x Абсцисса.
-    @param y Ордината.
-    */
+     * @brief Создаёт точку с заданными координатами.
+     * @param x Абсцисса.
+     * @param y Ордината.
+     */
     Point(const double x = 0.0, const double y = 0.0);
 
-    /**
-    @return Абсцисса точки.
-    */
+    /** @return Абсцисса точки. */
     double getX() const;
-
-    /**
-    @return Ордината точки.
-    */
+    /** @return Ордината точки. */
     double getY() const;
 
-    /**
-    @brief Проверяет равенство координат точки с допуском DBL_EPSILON.
-    @param other Точка для сравнения.
-    @return true, если разности обеих пар координат не превышают DBL_EPSILON.
-    */
+    /** @brief Сравнивает точки с учётом допуска для вещественных чисел. */
     bool operator==(const Point& other) const;
-
-    /**
-    @brief Проверяет, что точки не равны.
-    @param other Точка для сравнения.
-    @return Результат, противоположный operator==.
-    */
+    /** @brief Проверяет неравенство точек. */
     bool operator!=(const Point& other) const;
 
-    /**
-    @brief Записывает координаты точки в поток в формате «x y».
-    @param output Поток вывода.
-    @param point Записываемая точка.
-    @return Тот же поток вывода, чтобы можно было объединять операции <<.
-    */
+    /** @brief Записывает координаты точки как x пробел y. */
     friend std::ostream& operator<<(std::ostream& output, const Point& point);
-
-    /**
-    @brief Читает из потока две координаты в формате «x y».
-    @param input Поток ввода.
-    @param point Точка, координаты которой будут заменены при успешном чтении.
-    @return Тот же поток; при ошибке его состояние сообщает о неудаче.
-    */
+    /** @brief Читает координаты точки как x пробел y. */
     friend std::istream& operator>>(std::istream& input, Point& point);
 };
