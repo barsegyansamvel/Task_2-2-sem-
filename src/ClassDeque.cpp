@@ -7,7 +7,7 @@ Deque::Deque() noexcept : data(nullptr), count(0)
 {
 }
 
-Deque::Deque(std::initializer_list<int> values) : Deque()
+Deque::Deque(const std::initializer_list<int> values) : Deque()
 {
     if (values.size() != 0)
     {
@@ -34,7 +34,6 @@ Deque::Deque(const Deque& other) : Deque()
 
 Deque::Deque(Deque&& other) noexcept : data(other.data), count(other.count)
 {
-    // Исходный объект больше не владеет массивом и не удалит его в деструкторе.
     other.data = nullptr;
     other.count = 0;
 }
@@ -48,9 +47,7 @@ Deque& Deque::operator=(const Deque& other)
 {
     if (this != &other)
     {
-        // Сначала создаём копию: при ошибке выделения памяти текущий дек сохранится.
         Deque copy(other);
-        // После обмена временный объект освободит прежний массив текущего дека.
         std::swap(data, copy.data);
         std::swap(count, copy.count);
     }
@@ -78,9 +75,8 @@ void Deque::checkNotEmpty() const
     }
 }
 
-void Deque::push_back(int value)
+void Deque::push_back(const int value)
 {
-    // Выделяем новый массив с местом для добавляемого элемента.
     int* newData = new int[count + 1];
     for (std::size_t i = 0; i < count; ++i)
     {
@@ -92,11 +88,10 @@ void Deque::push_back(int value)
     ++count;
 }
 
-void Deque::push_front(int value)
+void Deque::push_front(const int value)
 {
     int* newData = new int[count + 1];
     newData[0] = value;
-    // При копировании сдвигаем прежние элементы на одну позицию вправо.
     for (std::size_t i = 0; i < count; ++i)
     {
         newData[i + 1] = data[i];
@@ -109,7 +104,6 @@ void Deque::push_front(int value)
 int Deque::pop_back()
 {
     checkNotEmpty();
-    // Уменьшаем число элементов; сам массив будет освобождён позже.
     return data[--count];
 }
 
@@ -156,7 +150,7 @@ std::string Deque::toString() const
     return result + "}";
 }
 
-Deque& Deque::operator<<(int value)
+Deque& Deque::operator<<(const int value)
 {
     push_back(value);
     return *this;
