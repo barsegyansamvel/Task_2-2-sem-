@@ -27,7 +27,7 @@ public:
      * @brief Создаёт дек из списка инициализации, сохраняя порядок чисел.
      * @param values Список целых чисел, например {1, 2, 3}.
      */
-    Deque(std::initializer_list<int> values);
+    Deque(const std::initializer_list<int> values);
 
     /**
      * @brief Конструктор копирования: создаёт независимую копию массива.
@@ -62,13 +62,13 @@ public:
      * @brief Добавляет число в конец дека.
      * @param value Добавляемое число.
      */
-    void push_back(int value);
+    void push_back(const int value);
 
     /**
      * @brief Добавляет число в начало дека, сдвигая остальные элементы.
      * @param value Добавляемое число.
      */
-    void push_front(int value);
+    void push_front(const int value);
 
     /**
      * @brief Удаляет последний элемент дека.
@@ -115,7 +115,7 @@ public:
      * @param value Добавляемое число.
      * @return Ссылка на дек для записи вида deque << 1 << 2.
      */
-    Deque& operator<<(int value);
+    Deque& operator<<(const int value);
 
     /**
      * @brief Оператор >>: извлекает число из начала дека через pop_front().
